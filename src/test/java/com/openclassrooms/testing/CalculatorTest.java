@@ -32,7 +32,8 @@ public class CalculatorTest {
 	private static Instant startedAt;
 	private Calculator calculatorUnderTest;
 	
-	private static Logger logger;
+	private  Logger logger;// ne pas definir en static sinon la class logger ne fonctionne pas
+	
 	//definit le logger  en appelant la methode lors du test de la classe de test juste apres
 	//la creation de la classe (avec l interface testInstancePostProcessor de LoggingExtension) de test pour appeler ensuite dans les test logger.info
 	public void setLogger(Logger logger) {
@@ -53,13 +54,13 @@ public class CalculatorTest {
 
 	@BeforeAll
 	public static void initStartingTime() {
-		logger.info("Appel avant tous les tests");
+		//logger.info("Appel avant tous les tests");
 		startedAt = Instant.now();
 	}
 
 	@AfterAll
 	public static void showTestDuration() {
-		logger.info("Appel après tous les tests");
+		//logger.info("Appel après tous les tests");
 		Instant endedAt = Instant.now();
 		long duration = Duration.between(startedAt, endedAt).toMillis();
 		System.out.println(MessageFormat.format("Durée des tests : {0} ms", duration));
