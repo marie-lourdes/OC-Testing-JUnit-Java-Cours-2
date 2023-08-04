@@ -58,6 +58,7 @@ public class CalculatorTest {
 	}
 
 	@Test
+	@Tag("QuatreOperations")
 	@DisplayName("Réussir à additioner des nombre entiers") // (4)
 	public void testAddTwoPositiveNumbers() {
 		// Arrange
@@ -72,7 +73,8 @@ public class CalculatorTest {
 		assertEquals(5, somme);
 	}
 
-	@Test	
+	@Test
+	@Tag("QuatreOperations")
 	@DisplayName("Réussir à multiplier des nombre entiers") // (4)
 	public void multiply_shouldReturnTheProduct_ofTwoIntegers() {
 		// Arrange
