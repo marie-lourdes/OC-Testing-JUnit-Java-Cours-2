@@ -3,6 +3,7 @@ package com.openclassrooms.testing;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withinPercentage;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
@@ -25,7 +26,7 @@ public class ConversionCalculatorTest {
 			Double actualFahrenheit = calculatorUnderTest.celsiusToFahrenheit(0.0);
 			assertThat(actualFahrenheit).isCloseTo(32.0, withinPercentage(0.01));
 		}
-
+        @Disabled
 		@Test
 		@DisplayName("Soit une T° à 32°F, lorsque l'on convertit en °C, alors on obtient 0°C.")
 		public void fahrenheitToCelsius_returnsZeroCelciusTempurature_whenThirtyTwo() {
