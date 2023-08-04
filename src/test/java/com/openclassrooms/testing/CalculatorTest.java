@@ -32,7 +32,7 @@ public class CalculatorTest {
 	private static Instant startedAt;
 	private Calculator calculatorUnderTest;
 	
-	private  Logger logger;// ne pas definir en static sinon la class logger ne fonctionne pas
+	private  Logger logger;// ne pas definir en static sinon la class logger ne fonctionne pas avec la methode setLogger()
 	
 	//definit le logger  en appelant la methode lors du test de la classe de test juste apres
 	//la creation de la classe (avec l interface testInstancePostProcessor de LoggingExtension) de test pour appeler ensuite dans les test logger.info
