@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,8 +30,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class CalculatorTest {
 
 	private static Instant startedAt;
-
 	private Calculator calculatorUnderTest;
+	
+	private Logger logger;
+	//definit le logger  en appelant la methode lors du test de la classe de test juste apres
+	//la creation de la classe de test pour appeler ensuite dans les test logger.info
+	public void setLogger(Logger logger) {
+		this.logger = logger;
+	}
 
 	@BeforeEach
 	public void initCalculator() {
