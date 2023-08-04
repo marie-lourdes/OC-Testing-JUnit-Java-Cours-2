@@ -14,11 +14,16 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+@Tag("calculTest")
+@DisplayName("Réussir à affectuer les 4 operations de base")
 
 public class CalculatorTest {
 
@@ -53,6 +58,7 @@ public class CalculatorTest {
 	}
 
 	@Test
+	@DisplayName("Réussir à additioner des nombre entiers") // (4)
 	public void testAddTwoPositiveNumbers() {
 		// Arrange
 		int a = 2;
@@ -66,7 +72,8 @@ public class CalculatorTest {
 		assertEquals(5, somme);
 	}
 
-	@Test
+	@Test	
+	@DisplayName("Réussir à multiplier des nombre entiers") // (4)
 	public void multiply_shouldReturnTheProduct_ofTwoIntegers() {
 		// Arrange
 		int a = 42;
