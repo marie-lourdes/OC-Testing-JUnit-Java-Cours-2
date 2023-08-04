@@ -32,16 +32,16 @@ public class CalculatorTest {
 	private static Instant startedAt;
 	private Calculator calculatorUnderTest;
 	
-	private Logger logger;
+	private static Logger logger;
 	//definit le logger  en appelant la methode lors du test de la classe de test juste apres
-	//la creation de la classe de test pour appeler ensuite dans les test logger.info
+	//la creation de la classe (avec l interface testInstancePostProcessor de LoggingExtension) de test pour appeler ensuite dans les test logger.info
 	public void setLogger(Logger logger) {
 		this.logger = logger;
 	}
 
 	@BeforeEach
 	public void initCalculator() {
-		System.out.println("Appel avant chaque test");
+		logger.info("Appel avant chaque test");
 		calculatorUnderTest = new Calculator();
 	}
 
@@ -53,13 +53,13 @@ public class CalculatorTest {
 
 	@BeforeAll
 	public static void initStartingTime() {
-		System.out.println("Appel avant tous les tests");
+		logger.info("Appel avant tous les tests");
 		startedAt = Instant.now();
 	}
 
 	@AfterAll
 	public static void showTestDuration() {
-		System.out.println("Appel après tous les tests");
+		logger.info("Appel après tous les tests");
 		Instant endedAt = Instant.now();
 		long duration = Duration.between(startedAt, endedAt).toMillis();
 		System.out.println(MessageFormat.format("Durée des tests : {0} ms", duration));
