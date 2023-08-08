@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -159,6 +160,24 @@ public class CalculatorTest {
 		int number = 0;
 		Set<Integer> actualDigits = calculatorUnderTest.digitsSet(number);
 		assertThat(actualDigits).containsExactly(0);
+	}
+	
+	@Test
+	public void multiplyAndDivide_shouldBeIdentity() {
+		// GIVEN
+		final Random r = new Random();// class random et et la methode nextInt() renvoit un entier aleatoire entre 0 et un nombre passé en parametre de cette methode
+		final int a = r.nextInt() % 100; // Nombre aléatoire entre 0 et 99
+		final int b = r.nextInt() % 10; // Nombre aléatoire entre 0 et 9
+
+		// WHEN on multiplie a par b puis on divise par b
+		final int c = calculatorUnderTest.divide(calculatorUnderTest.multiply(a, b), b);
+         int d = new Random().nextInt();
+         System.out.println(" class random" +d);
+         double e = Math.random();// envoit un  nombre decimal entre 0 et 1
+         System.out.println(" math random" +e);
+		// THEN on ré-obtient a
+		assertThat(c).isEqualTo(a);
+		//Java leve une exception quand la class random et la methode renvoit un entier 0 pour la division, java leve une exception arithmetic division/0
 	}
 
 }
