@@ -22,8 +22,11 @@ public class SolutionFormatterTest {
 		// WHEN
 		String result = solutionFormatter.format(number);
 		
-		// THEN
-		assertThat(result).isEqualTo("1 234 567 890");
+		// THEN 
+		// integrer les espace de la methode String.format appele depuis la method format de la class SolutionFormatter, dans le resultat attendu
+		// sinon le result sera faussement echoué car  formt() n a pas d espace standard 
+		//assertThat(result).isEqualTo("1 234 567 890");// test echoue
+		assertThat(result).isEqualTo("1 234 567 890");// test reussi
 	}
 	
 }
