@@ -39,7 +39,10 @@ public class Calculator {
 	
 	public int fact(int a) {
 		// MAUVAISE IMPLEMENTATION de la fonction factorielle
-		return a*fact(a-1);
+		if(a == 0) {
+			return 1;
+		}
+		return a*fact(a-1);// fonction recursive
 	}
 
 	public void longCalculation() {

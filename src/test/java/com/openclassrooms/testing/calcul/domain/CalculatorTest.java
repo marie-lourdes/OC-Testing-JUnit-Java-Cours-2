@@ -33,7 +33,7 @@ public class CalculatorTest {
 
 	private Calculator calculatorUnderTest;
 	
-	private int cacheFactorial;
+	//private int cacheFactorial;
 
 	private Logger logger;
 
@@ -177,7 +177,8 @@ public class CalculatorTest {
 		
 		// WHEN
 		// Calculer 12! et sauve la valeur pour un autre test
-		cacheFactorial = calculatorUnderTest.fact(number);
+		// cet variable doit etre declaré en  local et propre a ce test et ne pas eêtre reutiliser dans le test qui suit
+		int cacheFactorial = calculatorUnderTest.fact(number);
 		
 		// THEN
 		assertThat(cacheFactorial).isEqualTo(12*11*10*9*8*7*6*5*4*3*2);
@@ -187,10 +188,11 @@ public class CalculatorTest {
 	@Test
 	public void digitsSetOfFact12_shouldReturnsTheCorrectAnswser() {
 		// GIVEN
-		// 12! est mis en cache par le test précédent
+		// 12! est mis en cache par le test précédent avec calculatorUnderTest.digitsSet(cacheFactorial);
+		// indiquez en dure le result actuel la factorielle 12
 		
 		// WHEN
-		Set<Integer> actualDigits = calculatorUnderTest.digitsSet(cacheFactorial);
+		Set<Integer> actualDigits = calculatorUnderTest.digitsSet(12*11*10*9*8*7*6*5*4*3*2);
 		
 		// THEN
 		assertThat(actualDigits).containsExactlyInAnyOrder(0, 1, 4, 6, 7, 9);
