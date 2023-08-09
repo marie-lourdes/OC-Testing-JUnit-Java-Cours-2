@@ -164,6 +164,7 @@ public class CalculatorTest {
 	
 	@Test
 	public void multiplyAndDivide_shouldBeIdentity() {
+	//	la multiplication apr le nombre b et la divion par ce meme nombre doit renvoyer le nombre de depart
 		// GIVEN
 		final Random r = new Random();// class random et et la methode nextInt() renvoit un entier aleatoire entre 0 et un nombre passé en parametre de cette methode
 		final int a = r.nextInt() % 100; // Nombre aléatoire entre 0 et 99
