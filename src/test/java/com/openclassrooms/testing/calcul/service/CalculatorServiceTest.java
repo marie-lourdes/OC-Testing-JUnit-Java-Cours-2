@@ -1,7 +1,9 @@
 package com.openclassrooms.testing.calcul.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -61,6 +63,19 @@ public class CalculatorServiceTest {
 		// THEN
 		verify(calculator).add(any(Integer.class), any(Integer.class));
 		assertThat(result).isEqualTo(rleft + rright);
+	}
+
+	@Test
+	public void calculate_shouldThrowIllegalArgumentException_forADivisionBy0() {
+		// GIVEN
+		when(calculator.divide(1, 0)).thenThrow(new ArithmeticException());
+
+		// WHEN
+		assertThrows(IllegalArgumentException.class, () -> classUnderTest.calculate(
+				new CalculationModel(CalculationType.DIVISION, 1, 0)));
+
+		// THEN
+		verify(calculator, times(1)).divide(1, 0);
 	}
 
 }
