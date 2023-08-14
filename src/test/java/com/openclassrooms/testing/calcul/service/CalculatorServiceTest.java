@@ -52,17 +52,17 @@ public class CalculatorServiceTest {
 	public void calculate_shouldUseCalculator_forAnyAddition() {
 		// GIVEN
 		final Random r = new Random();
-		Integer rleft = r.nextInt();
-		Integer rright = r.nextInt();
-		when(calculator.add(any(Integer.class), any(Integer.class))).thenReturn(rleft + rright);
+		Integer argLeft = r.nextInt();
+		Integer argRight = r.nextInt();
+		when(calculator.add(any(Integer.class), any(Integer.class))).thenReturn(argLeft + argRight);
 
 		// WHEN
-		final int result = classUnderTest.calculate(new CalculationModel(CalculationType.ADDITION, rleft, rright))
+		final int result = classUnderTest.calculate(new CalculationModel(CalculationType.ADDITION, argLeft, argRight))
 				.getSolution();
 
 		// THEN
 		verify(calculator).add(any(Integer.class), any(Integer.class));
-		assertThat(result).isEqualTo(rleft + rright);
+		assertThat(result).isEqualTo(argLeft + argRight);
 	}
 
 	@Test
