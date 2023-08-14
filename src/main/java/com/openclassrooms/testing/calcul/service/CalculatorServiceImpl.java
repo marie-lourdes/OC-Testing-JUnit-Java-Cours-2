@@ -39,7 +39,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			calculationModel.setSolution(response);
 
 		} catch (Exception e) {
-			e.getMessage();
+			e.printStackTrace();
 			throw new IllegalArgumentException("illegal argument");
 
 		}
