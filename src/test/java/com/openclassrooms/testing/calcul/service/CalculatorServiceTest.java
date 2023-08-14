@@ -1,8 +1,11 @@
 package com.openclassrooms.testing.calcul.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +42,25 @@ public class CalculatorServiceTest {
 		// THEN
 		verify(calculator).add(1, 2);
 		assertThat(result).isEqualTo(3);
+	}
+
+	// test avec des parametres d entrée aleatoire et calculator qui prend en
+	// parametre n'importe quelle valeur mais du type demandé
+	@Test
+	public void calculate_shouldUseCalculator_forAnyAddition() {
+		// GIVEN
+		final Random r = new Random();
+		Integer rleft = r.nextInt();
+		Integer rright = r.nextInt();
+		when(calculator.add(any(Integer.class), any(Integer.class))).thenReturn(rleft + rright);
+
+		// WHEN
+		final int result = classUnderTest.calculate(new CalculationModel(CalculationType.ADDITION, rleft, rright))
+				.getSolution();
+
+		// THEN
+		verify(calculator).add(any(Integer.class), any(Integer.class));
+		assertThat(result).isEqualTo(rleft + rright);
 	}
 
 }
