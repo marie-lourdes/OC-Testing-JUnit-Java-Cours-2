@@ -18,9 +18,9 @@ public class SolutionFormatterTest {
 	public void format_shouldFormatAnyBigNumber() {
 		// GIVEN
 		final int number = 1234567890;
-
 		// WHEN
 		final String result = solutionFormatter.format(number);
+		System.out.println("format result" + result);
 
 		// THEN
 		assertThat(result).isEqualTo("1 234 567 890");
