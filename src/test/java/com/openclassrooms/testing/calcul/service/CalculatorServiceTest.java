@@ -21,22 +21,26 @@ import com.openclassrooms.testing.calcul.domain.model.CalculationType;
 
 @ExtendWith(MockitoExtension.class)
 public class CalculatorServiceTest {
-
+// les mock pour simuler les entree car ce ne sont pas ces classe et interface que nous souhaitons tester
+//	mais le calculatorService dont la classe et les methode cree un objet reel et les appel de methode a la classe
 	@Mock
 	Calculator calculator;
+
+	@Mock
+	SolutionFormatter solutionFormatter;
 
 	CalculatorService classUnderTest;
 
 	@BeforeEach
 	public void init() {
-		classUnderTest = new CalculatorServiceImpl(calculator);
+		classUnderTest = new CalculatorServiceImpl(calculator, solutionFormatter);
 	}
 
 	@Test
 	public void calculate_shouldUseCalculator_forAddition() {
 		// GIVEN
 		when(calculator.add(1, 2)).thenReturn(3);
-
+		
 		// WHEN
 		final int result = classUnderTest.calculate(
 				new CalculationModel(CalculationType.ADDITION, 1, 2)).getSolution();
@@ -82,6 +86,7 @@ public class CalculatorServiceTest {
 	public void calculate_shouldFormatSolution_forAnAddition() {
 		// GIVEN
 		when(calculator.add(10000, 3000)).thenReturn(13000);
+		when(solutionFormatter.format(13000)).thenReturn("13 000");
 
 		// WHEN
 		final String formattedResult = classUnderTest
