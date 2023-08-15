@@ -78,4 +78,18 @@ public class CalculatorServiceTest {
 		verify(calculator, times(1)).divide(1, 0);
 	}
 
+	@Test
+	public void calculate_shouldFormatSolution_forAnAddition() {
+		// GIVEN
+		when(calculator.add(10000, 3000)).thenReturn(13000);
+
+		// WHEN
+		final String formattedResult = classUnderTest
+		    .calculate(new CalculationModel(CalculationType.ADDITION, 10000, 3000))
+    		.getFormattedSolution();
+
+		// THEN
+		assertThat(formattedResult).isEqualTo("13 000");
+	}
+
 }
