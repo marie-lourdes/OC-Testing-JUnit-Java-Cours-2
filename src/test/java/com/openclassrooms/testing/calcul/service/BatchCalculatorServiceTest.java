@@ -39,8 +39,7 @@ public class BatchCalculatorServiceTest {
 		batchCalculatorService = new BatchCalculatorServiceImpl(calculatorService);
 
 		batchCalculatorServiceNoMock = new BatchCalculatorServiceImpl(
-				new CalculatorServiceImpl(new Calculator(),
-						new SolutionFormatterImpl()));
+				new CalculatorServiceImpl(new Calculator(), new SolutionFormatterImpl()));
 	}
 
 	@Test
@@ -69,41 +68,45 @@ public class BatchCalculatorServiceTest {
 		// THEN
 		verify(calculatorService, times(4)).calculate(calculationModelCaptor.capture());
 		final List<CalculationModel> calculationModels = calculationModelCaptor.getAllValues();
-		assertThat(calculationModels)
-				.extracting(CalculationModel::getLeftArgument, CalculationModel::getType,
-						CalculationModel::getRightArgument)
-				.containsExactly(
-						tuple(2, CalculationType.ADDITION, 2),
-						tuple(5, CalculationType.SUBTRACTION, 4),
-						tuple(6, CalculationType.MULTIPLICATION, 8),
+		assertThat(calculationModels).extracting(CalculationModel::getLeftArgument, CalculationModel::getType,
+				CalculationModel::getRightArgument).containsExactly(tuple(2, CalculationType.ADDITION, 2),
+						tuple(5, CalculationType.SUBTRACTION, 4), tuple(6, CalculationType.MULTIPLICATION, 8),
 						tuple(9, CalculationType.DIVISION, 3));
 	}
+
+	/*
+	 * public CalculationModel answer(InvocationOnMock invocation) { final
+	 * CalculationModel model = invocation.getArgument(0, CalculationModel.class);
+	 * switch (model.getType()) { case ADDITION: model.setSolution(4); break; case
+	 * SUBTRACTION: model.setSolution(1); break; case MULTIPLICATION:
+	 * model.setSolution(48); break; case DIVISION: model.setSolution(3); break;
+	 * default: } return model; }); }
+	 */
 
 	@Test
 	public void givenOperationsList_whenbatchCalculate_thenCallsServiceAndReturnsAnswer()
 			throws IOException, URISyntaxException {
 		// GIVEN
 		final Stream<String> operations = Arrays.asList("2 + 2", "5 - 4", "6 x 8", "9 / 3").stream();
-		when(calculatorService.calculate(any(CalculationModel.class)))
-				.then(invocation -> {
-					final CalculationModel model = invocation.getArgument(0, CalculationModel.class);
-					switch (model.getType()) {
-					case ADDITION:
-						model.setSolution(4);
-						break;
-					case SUBTRACTION:
-						model.setSolution(1);
-						break;
-					case MULTIPLICATION:
-						model.setSolution(48);
-						break;
-					case DIVISION:
-						model.setSolution(3);
-						break;
-					default:
-					}
-					return model;
-				});
+		when(calculatorService.calculate(any(CalculationModel.class))).then(invocation -> {
+			final CalculationModel model = invocation.getArgument(0, CalculationModel.class);
+			switch (model.getType()) {
+			case ADDITION:
+				model.setSolution(4);
+				break;
+			case SUBTRACTION:
+				model.setSolution(1);
+				break;
+			case MULTIPLICATION:
+				model.setSolution(48);
+				break;
+			case DIVISION:
+				model.setSolution(3);
+				break;
+			default:
+			}
+			return model;
+		});
 
 		// WHEN
 		final List<CalculationModel> results = batchCalculatorService.batchCalculate(operations);
